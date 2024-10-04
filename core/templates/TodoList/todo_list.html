@@ -12,82 +12,112 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
     <style>
-        .btn:hover{
+        .btn:hover {
             background-color: red;
+        }
+
+        .Todo {
+            width: 30rem;
+            height: auto;
+            box-shadow: 0px 0px 10px 0px;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 10rem auto;
+        }
+
+        .header {
+            width: 96%;
+            height: 4rem;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .inp-new_task {
+            width: 80%;
+            height: 2rem;
+            outline: none;
+            border: 1px solid #00000040;
+            border-radius: 3px;
+            font-size: 17px;
+            font-family: 'vazir', sans-serif;
+            padding: 2px;
+            text-align: center;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 4rem;
+            height: auto;
+            font-size: 15px;
+            font-family: 'vazir', sans-serif;
+            border: none;
+            border-radius: 3px;
+            color: #ffffff;
+        }
+
+        .Task {
+            display: flex;
+            width: 90%;
+            height: auto;
+            padding: 10px;
+        }
+
+        .Text {
+            width: 80%;
+            height: auto;
+            box-shadow: 0px 0px 5px 0px;
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-bottom: 1rem;
+        }
+
+        .p {
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'vazir', sans-serif;
+            direction: rtl;
+            text-align: center;
+        }
+
+        .new_task {
+            width: 90%;
+            height: auto;
+            padding: 10px;
         }
     </style>
 </head>
 
 <body>
-  
-    <div class="Todo" style="
-        width: 30rem;
-        height: auto;
-        box-shadow: 0px 0px 10px 0px;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 10rem auto;">
 
-        <div class="header" style="    width: 96%;
-        height: 4rem;
-        /* box-shadow: 0px 0px 3px 0; */
-        padding: 10px;
-        display: flex;
-    justify-content: space-around;">
+    <div class="Todo">
+
+        <div class="header">
             <h3>Todo App</h3>
             <i class='bx bx-x' style="font-size: 25px;width: auto;height: 2.5rem;margin-top: 1rem;"></i>
         </div>
-        <div class="new_task" style="    width: 90%;
-        height: auto;
-        padding: 10px;">
-            <input type="text" style="    width: 80%;
-            height: 2rem;
-            outline: none;
-            border: 1px solid #00000040;
-            border-radius: 3px;font-size: 17px;font-family: 'vazir', sans-serif;    padding: 2px;text-align: center;">
-            <button class="btn" style="cursor: pointer;width: 4rem;
-            height: auto;
-            padding: 7px;
-            font-size: 15px;
-            font-family: 'vazir', sans-serif;
-            background-color: #2da8ff;
-            border: none;
-            border-radius: 3px;
-            color: #ffffff;">ارسال</button>
-        </div>
+        <form method="post" >
+            {% csrf_token %}
+            <div class="new_task">
+                <input type="text" class="inp-new_task" name="new_task">
+                <button class="btn" style="background-color: #2da8ff;padding: 7px;" type="submit">ارسال</button>
+            </div>
+        </form>
         <hr />
-                    {% for item in todo %}
-                        {% if item.user == request.user %}
-                        <div class="Task" style="    display: flex;
-                        width: 90%;
-                        height: auto;
-                        padding: 10px;">
-                            <div class="Text" style="    width: 80%;
-                            height: auto;
-                            box-shadow: 0px 0px 5px 0px;
-                            border-radius: 5px;
-                            padding: 0 10px;margin-bottom: 1rem;
-                        ">
-                                                    <p style="    font-size: 15px;
-                                                    font-weight: 500;
-                                                    font-family: 'vazir', sans-serif;
-                                                    direction: rtl;
-                                                    text-align: center;">{{ item.Text }}</p>
-                            </div>
-                            <i class='bx bx-trash' style="font-size: 50px; color: red; cursor: pointer;"></i>         
-                            <button style="cursor: pointer;width: 4rem;
-                            height: 55px;
-                            font-size: 15px;
-                            font-family: 'vazir', sans-serif;
-                            background-color: #00c082;
-                            border: none;
-                            border-radius: 3px;
-                            color: #ffffff;">تمام</button> 
+        {% for item in todo %}
+        {% if item.user == request.user %}
+        <div class="Task">
+            <div class="Text">
+                <p class="p">{{ item.Text }}</p>
+            </div>
+            <a href="#"><i class='bx bx-trash' style="font-size: 50px; color: red; cursor: pointer;"></i></a>
+            <button class='btn' style="width: 4rem; height: 55px; background-color: #00c082;
+                            ">تمام</button>
 
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-              
+        </div>
+        {% endif %}
+        {% endfor %}
+
     </div>
 
 </body>
