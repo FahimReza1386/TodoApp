@@ -1,0 +1,130 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Todo</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+        .btn:hover {
+            background-color: red;
+        }
+
+        .Todo {
+            width: 30rem;
+            height: auto;
+            box-shadow: 0px 0px 10px 0px;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 10rem auto;
+        }
+
+        .header {
+            width: 96%;
+            height: 4rem;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        input {
+            width: 100%;
+            height: 2.5rem;
+            outline: none;
+            border: 1px solid #00000040;
+            border-radius: 3px;
+            font-size: 17px;
+            font-family: 'vazir', sans-serif;
+            padding: 2px;
+            text-align: center;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 4rem;
+            height: auto;
+            font-size: 15px;
+            font-family: 'vazir', sans-serif;
+            border: none;
+            border-radius: 3px;
+            color: #ffffff;
+        }
+
+        .Task {
+            display: flex;
+            width: 90%;
+            height: auto;
+            padding: 10px;
+        }
+
+        .Text {
+            width: 80%;
+            height: auto;
+            box-shadow: 0px 0px 5px 0px;
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-bottom: 1rem;
+        }
+
+        .p {
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'vazir', sans-serif;
+            direction: rtl;
+            text-align: center;
+        }
+
+        .new_task {
+            width: 90%;
+            height: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="Todo">
+
+        <div class="header">
+            <h3>Todo App</h3>
+            <i class='bx bx-x' style="font-size: 25px;width: auto;height: 2.5rem;margin-top: 1rem;"></i>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <p class="p">دوست داری اینو حذف کنی ؟ {{ object.neme }}</p>
+            <input type="submit" value="بله" style="background-color: red; cursor: pointer;margin: 1rem auto;">
+        </form>
+        
+        <hr />
+       
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+</body>
+
+</html>

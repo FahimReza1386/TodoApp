@@ -11,7 +11,8 @@ class Todo(models.Model):
     
     
     user=models.ForeignKey(User , on_delete=models.CASCADE)
-    Text=models.TextField(max_length=500)
+    Text=models.CharField(max_length=500)
+    Ticked = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user}'
