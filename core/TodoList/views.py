@@ -6,8 +6,10 @@ from django.views.generic import ListView,CreateView,DeleteView,UpdateView,Detai
 from django.contrib.auth.mixins import LoginRequiredMixin , PermissionRequiredMixin 
 from .models import Todo
 from .forms import TaskForm , TickedForm
-# Create your views here.
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
+# Create your views here.
 
 
 class Task(LoginRequiredMixin,ListView):
