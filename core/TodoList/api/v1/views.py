@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 from .serializers import TaskSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerPermissions
 from django_filters.rest_framework import DjangoFilterBackend
 from .paginations import PermissionPagination
@@ -13,7 +13,7 @@ from ...models import Todo
 
 
 class TaskModelView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated,IsOwnerPermissions] 
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerPermissions] 
     serializer_class = TaskSerializer
     filter_backends = [DjangoFilterBackend , SearchFilter , OrderingFilter]
     filterset_fields = ['Ticked']
