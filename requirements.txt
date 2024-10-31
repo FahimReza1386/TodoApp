@@ -3,10 +3,17 @@
 django >3.2,<3.3
 python-decouple
 djangorestframework
+pillow
 
 # Third Party Modules
 markdown
 django-filter
 drf-yasg[validation]
+djangorestframework-simplejwt
+coreapi
 
 # Deployment Modules
+
+
+# Email Third Paty Modules
+django-mail-templated

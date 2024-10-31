@@ -20,4 +20,7 @@ urlpatterns = [
     path('jwt/verify/' , views.CustomTokenVerifyView.as_view() , name="verify-jwt"),
 
 
+    # Test Send email Static
+    path('test-email/' , views.TestEmailSend.as_view() , name="Test-Email"),
+
 ]
