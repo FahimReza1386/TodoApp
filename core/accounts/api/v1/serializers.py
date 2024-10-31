@@ -1,4 +1,5 @@
 from rest_framework import serializers # type: ignore
+from django.shortcuts import get_object_or_404
 from ...models import *
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
@@ -64,3 +65,23 @@ class CustomTokenObtainPairViewSerializer(TokenObtainPairSerializer):
         validated_data['user_id'] = self.user.id
         
         return validated_data
+    
+
+
+
+class ActivationResentApiSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    def validate(self , attrs):
+        email = attrs.get('email')
+
+        try:
+            user_obj = get_object_or_404(User , email = email)
+        except User.DoesNotExist:
+            raise serializers.ValidationError({'details' : 'user does not exist'})
+
+        if user_obj.is_verified:
+            raise serializers.ValidationError({'details' : "user is already activated and verified ."})
+        
+        attrs['user'] = user_obj
+        return super().validate(attrs)
