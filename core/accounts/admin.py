@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User , Profile
 from django.contrib.auth.forms import UserChangeForm , UserCreationForm
+
 # Register your models here.
 
 
 class CustomUserAdmin(UserAdmin):
     model = User 
-    list_display=('email' , 'is_staff' , 'is_active' , 'is_superuser')
-    list_filter=('is_staff','is_superuser' , 'is_active')
+    list_display=('email' , 'is_staff' , 'is_active' , 'is_superuser' , 'is_verified')
+    list_filter=('is_staff','is_superuser' , 'is_active' , 'is_verified')
     searching_fields = ('email',)
     ordering=('email',)
     fieldsets=(
@@ -19,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
         }),
         ('Permission', {
             "fields" : (
-                "is_staff" , 'is_superuser' , 'is_active' 
+                "is_staff" , 'is_superuser' , 'is_active' , 'is_verified'
             )
         }),
         ('group Permission', {
