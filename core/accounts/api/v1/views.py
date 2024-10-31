@@ -4,6 +4,9 @@ from .serializers import *
 from rest_framework.response import Response # type: ignore
 from rest_framework.authtoken.views import ObtainAuthToken # type: ignore
 from rest_framework.authtoken.models import Token # type: ignore
+from rest_framework.permissions import IsAuthenticated # type: ignore
+from rest_framework.views import APIView # type: ignore
+from rest_framework_simplejwt.views import TokenObtainPairView , TokenRefreshView , TokenVerifyView # type: ignore
 
 class RegistrationApi(generics.GenericAPIView):
     serializer_class = RegistrationApiSerializer
@@ -36,5 +39,21 @@ class CustomObtainAuthToken(ObtainAuthToken):
             'email':user.email
         })
 
-class CustomDiscardAuthToken(generics.GenericAPIView):
+class CustomDiscardAuthToken(APIView):
+    permission_class = [IsAuthenticated]
+
+    def post(self , request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairViewSerializer
+
+
+class CustomTokenRefreshView(TokenRefreshView):
+    pass
+
+class CustomTokenVerifyView(TokenVerifyView):
     pass

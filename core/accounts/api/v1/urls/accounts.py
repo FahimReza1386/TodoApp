@@ -1,5 +1,6 @@
 from django.urls import path , include
 from .. import views
+from rest_framework_simplejwt.views import TokenObtainPairView , TokenRefreshView , TokenVerifyView # type: ignore
 
 
 urlpatterns = [
@@ -10,6 +11,13 @@ urlpatterns = [
 
     path('token/login/' , views.CustomObtainAuthToken.as_view() , name="Login-Token"),
     path('token/logout/' , views.CustomDiscardAuthToken.as_view() , name="Logout-Token"),
+
+
+    # Create And Refresh And Verify with json web token (jwt)
+
+    path('jwt/create/' , views.CustomTokenObtainPairView.as_view() , name="Create-jwt"),
+    path('jwt/refresh/' , views.CustomTokenRefreshView.as_view() , name="refresh-jwt"),
+    path('jwt/verify/' , views.CustomTokenVerifyView.as_view() , name="verify-jwt"),
 
 
 ]

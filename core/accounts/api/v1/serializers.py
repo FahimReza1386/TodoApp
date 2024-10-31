@@ -4,6 +4,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer # type: ignore
 
 class RegistrationApiSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(max_length=250 , required=True , write_only=True)
@@ -50,3 +51,16 @@ class CustomObtainAuthTokenSerializer(serializers.Serializer):
             raise serializers.ValidationError(msg, code='authorization')
         attrs['user'] = user
         return attrs
+    
+
+
+class CustomTokenObtainPairViewSerializer(TokenObtainPairSerializer):
+
+    def validate(self , attrs):
+        validated_data=super().validate(attrs)
+        if not self.user.is_verified:
+            raise serializers.ValidationError({'detail':'your account is not verified.'})
+        validated_data['email'] = self.user.email
+        validated_data['user_id'] = self.user.id
+        
+        return validated_data
