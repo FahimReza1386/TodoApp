@@ -3,5 +3,16 @@
         "activityBar.background": "#023600",
         "titleBar.activeBackground": "#024C00",
         "titleBar.activeForeground": "#EDFFED"
-    }
+    },
+    "cSpell.words": [
+        "cjsn",
+        "coreapi",
+        "filterset",
+        "fvocd",
+        "paginations",
+        "redoc",
+        "ugettext",
+        "viewsets",
+        "yasg"
+    ]
 }
