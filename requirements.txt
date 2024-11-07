@@ -17,3 +17,9 @@ coreapi
 
 # Email Third Paty Modules
 django-mail-templated
+
+
+
+# Testing
+pytest
+pytest-django
