@@ -29,3 +29,6 @@ class TaskModelView(viewsets.ModelViewSet):
     def get_user_id(self , request):
         id = request.user.id
         return Response({'Your Id :':str(id)})
+    
+    def perform_create(self, serializer):  
+        serializer.save(user=self.request.user)  

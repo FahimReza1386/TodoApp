@@ -2,6 +2,8 @@ from django.urls import path,include
 from . import views
 
 
+app_name="TodoList"
+
 urlpatterns = [
     path('' , views.Task.as_view() , name= 'Task'),
     path('add/' , views.New_Task.as_view() , name= 'New_Task'),
