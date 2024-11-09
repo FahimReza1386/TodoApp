@@ -19,7 +19,7 @@ def get_user():
 class TestTodoApi:
 
     def test_get_task_response_200_status(self , api_client , get_user):
-        url = reverse('TodoList:api-v1:Tasks-list')
+        url = reverse('TodoLists:api-v1:Tasks-list')
         user=get_user
         api_client.force_login(user=user)
         response = api_client.get(url)
@@ -27,7 +27,7 @@ class TestTodoApi:
 
 
     def test_create_task_response_201_status(self , api_client , get_user):
-        url = reverse('TodoList:api-v1:Tasks-list')
+        url = reverse('TodoLists:api-v1:Tasks-list')
         user = get_user
         api_client.force_login(user=user)
         data = {
@@ -44,7 +44,7 @@ class TestTodoApi:
         user = get_user
         api_client.force_login(user=user)
        
-        create_url = reverse('TodoList:api-v1:Tasks-list')
+        create_url = reverse('TodoLists:api-v1:Tasks-list')
         data = {
             "Text" : "test",
         }
@@ -55,16 +55,16 @@ class TestTodoApi:
 
         task_id = create_response.data['id']
 
-        get_response = api_client.get(reverse('TodoList:api-v1:Tasks-detail' ,args=[task_id]))
+        get_response = api_client.get(reverse('TodoLists:api-v1:Tasks-detail' ,args=[task_id]))
         # Get The Task
         assert get_response.status_code == 200 , get_response.content
 
-        del_url = reverse('TodoList:api-v1:Tasks-detail' ,args=[task_id])
+        del_url = reverse('TodoLists:api-v1:Tasks-detail' ,args=[task_id])
         response = api_client.delete(del_url)
         # Delete The Task
         assert response.status_code == 204 , response.content
 
-        get_response_after_delete = api_client.get(reverse('TodoList:api-v1:Tasks-detail', args=[task_id]))
+        get_response_after_delete = api_client.get(reverse('TodoLists:api-v1:Tasks-detail', args=[task_id]))
         # Check The Delete Task
         assert get_response_after_delete.status_code == 404 , response.content
 
@@ -73,7 +73,7 @@ class TestTodoApi:
         user = get_user
         api_client.force_login(user=user)
        
-        create_url = reverse('TodoList:api-v1:Tasks-list')
+        create_url = reverse('TodoLists:api-v1:Tasks-list')
         data = {
             "Text" : "test",
         }
@@ -83,11 +83,11 @@ class TestTodoApi:
         assert create_response.status_code == 201 , create_response.content
         task_id = create_response.data['id']
 
-        get_response = api_client.get(reverse('TodoList:api-v1:Tasks-detail' ,args=[task_id]))
+        get_response = api_client.get(reverse('TodoLists:api-v1:Tasks-detail' ,args=[task_id]))
         # Get The Task
         assert get_response.status_code == 200 , get_response.content
 
-        put_url = reverse('TodoList:api-v1:Tasks-detail' , args=[task_id])
+        put_url = reverse('TodoLists:api-v1:Tasks-detail' , args=[task_id])
         data={
             "Text" : "test2",
         }
@@ -100,7 +100,7 @@ class TestTodoApi:
         user = get_user
         api_client.force_login(user=user)
        
-        create_url = reverse('TodoList:api-v1:Tasks-list')
+        create_url = reverse('TodoLists:api-v1:Tasks-list')
         data = {
             "Text" : "test",
         }
@@ -110,11 +110,11 @@ class TestTodoApi:
         assert create_response.status_code == 201 , create_response.content
         task_id = create_response.data['id']
 
-        get_response = api_client.get(reverse('TodoList:api-v1:Tasks-detail' ,args=[task_id]))
+        get_response = api_client.get(reverse('TodoLists:api-v1:Tasks-detail' ,args=[task_id]))
         # Get The Task
         assert get_response.status_code == 200 , get_response.content
 
-        patch_url = reverse('TodoList:api-v1:Tasks-detail' , args=[task_id])
+        patch_url = reverse('TodoLists:api-v1:Tasks-detail' , args=[task_id])
         data={
             "Text" : "test2",
         }

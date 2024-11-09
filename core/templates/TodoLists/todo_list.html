@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,7 +134,7 @@
             <h3>Todo App</h3>
             <i class='bx bx-x' style="font-size: 25px;width: auto;height: 2.5rem;margin-top: 1rem;"></i>
         </div>
-        <form method="post" action="{% url 'New_Task'%}" >
+        <form method="post" action="{% url 'TodoLists:New_Task' %}" >
             {% csrf_token %}
             <div class="new_task-spsps" >
                 <!-- <input type="text" class="inp-new_task" name="new_task"> -->
@@ -154,9 +153,9 @@
                 <p class="p-spsps" style="text-decoration: line-through;">{{ item.Text }}</p>
                 {% endif %}
             </div>
-            <a href="{% url 'Delete_Task' pk=item.id %}"><i class='bx bx-trash' style="font-size: 50px; color: red; cursor: pointer;"></i></a>
-                            <a href="{% url 'Ticked' pk=item.id %}"><i class='bx bx-check Ticked' style="font-size: 50px;cursor: pointer;color: rgb(26, 83, 83);"></i></a>
-                        <a href="{% url 'Update_Task' pk=item.id %}"><i class='bx bx-edit' style="font-size: 50px;cursor: pointer;color: rgb(61, 168, 29);"></i></a>
+            <a href="{% url 'TodoLists:Delete_Task' pk=item.id %}"><i class='bx bx-trash' style="font-size: 50px; color: red; cursor: pointer;"></i></a>
+                            <a href="{% url 'TodoLists:Ticked' pk=item.id %}"><i class='bx bx-check Ticked' style="font-size: 50px;cursor: pointer;color: rgb(26, 83, 83);"></i></a>
+                        <a href="{% url 'TodoLists:Update_Task' pk=item.id %}"><i class='bx bx-edit' style="font-size: 50px;cursor: pointer;color: rgb(61, 168, 29);"></i></a>
 
 
         </div>
