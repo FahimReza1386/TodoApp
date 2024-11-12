@@ -23,3 +23,9 @@ django-mail-templated
 # Testing
 pytest
 pytest-django
+
+
+# Background Process
+celery
+django-celery-beat
+redis

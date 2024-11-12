@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config # type: ignore
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'mail_templated',
+    'django_celery_beat',
 
 ]
 
@@ -179,3 +181,15 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
+
+
+# Celery
+CELERY_BROKER_URL = 'redis://redis2:6379/1'
+
+
+CELERY_BEAT_SCHEDULE = {  
+    'del_ticked_task': {  
+        'task': 'TodoList.tasks.del_ticked_task',  
+        'schedule': timedelta(minutes=10),  # هر 10 دقیقه  
+    }  
+}  
