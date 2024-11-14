@@ -27,4 +27,5 @@ urlpatterns = [
     path('activation/confirm/<str:token>' , views.ActivationApiView.as_view() , name="Activation-Api"),
     # Resent Activation
     path('activation/resent/' , views.ActivationResentApiView.as_view() , name="Activation-Api"),
+    path('GetWeather/' , views.get_weather, name="Caching-Api"),
 ]

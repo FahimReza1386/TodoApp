@@ -2,7 +2,8 @@ from django.urls import path, include
 from django.shortcuts import get_object_or_404
 from rest_framework import generics , status  # type: ignore
 from .serializers import *
-from rest_framework.response import Response # type: ignore
+from rest_framework.response import Response# type: ignore
+from django.http import HttpResponse , JsonResponse
 from rest_framework.authtoken.views import ObtainAuthToken # type: ignore
 from rest_framework.authtoken.models import Token # type: ignore
 from rest_framework.permissions import IsAuthenticated # type: ignore
@@ -15,6 +16,14 @@ from .utils import EmailThread
 from django.conf import settings
 import jwt # type: ignore
 from jwt.exceptions import ExpiredSignatureError , InvalidSignatureError # type: ignore
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from rest_framework.response import Response # type: ignore
+from rest_framework.views import APIView # type: ignore
+from rest_framework import viewsets # type: ignore
+from rest_framework.decorators import api_view # type:ignore
+import requests
+import random
 
 class RegistrationApi(generics.GenericAPIView):
     serializer_class = RegistrationApiSerializer
@@ -161,3 +170,14 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset , user=self.request.user)
         return obj
+    
+@cache_page(1200)
+@api_view(["GET"])
+def get_weather(request):
+    content = {"user_feed": request.user.email}
+    API_KEY = '8f74ae0e2b6622ee9f7910440e3f8a82'  
+    city = 'Tehran'  
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric'  
+    response = requests.get(url)
+    rdm = random.choice(['True','False','Hi','How','Hello'])
+    return Response([content,rdm,response.json()])

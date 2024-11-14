@@ -8,7 +8,6 @@ from .paginations import PermissionPagination
 from rest_framework.filters import SearchFilter , OrderingFilter # type: ignore
 from rest_framework.decorators import action # type: ignore
 from rest_framework.response import Response # type: ignore
-
 from ...models import Todo
 
 

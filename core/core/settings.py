@@ -191,5 +191,18 @@ CELERY_BEAT_SCHEDULE = {
     'del_ticked_task': {  
         'task': 'TodoList.tasks.del_ticked_task',  
         'schedule': timedelta(minutes=10),  # هر 10 دقیقه  
-    }  
+    }
 }  
+
+
+# Caching Configs
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://redis2:6379/2",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }

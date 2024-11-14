@@ -29,3 +29,7 @@ pytest-django
 celery
 django-celery-beat
 redis
+
+
+# Caching
+django-redis
