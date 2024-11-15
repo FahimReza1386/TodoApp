@@ -171,6 +171,8 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         obj = get_object_or_404(queryset , user=self.request.user)
         return obj
     
+
+
 @cache_page(1200)
 @api_view(["GET"])
 def get_weather(request):

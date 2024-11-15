@@ -1,0 +1,16 @@
+
+@cache_page(1200)
+@api_view(["GET"])
+def get_weather(request):
+    content = {"user_feed": request.user.email}
+    API_KEY = '8f74ae0e2b6622ee9f7910440e3f8a82'  
+    city = 'Tehran'  
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric'  
+    response = requests.get(url)
+    rdm = random.choice(['True','False','Hi','How','Hello'])
+    return Response([content,rdm,response.json()])
+ 
+ 
+ 				کچینگ در api با کد بالا 
+ 				و اعلام وضعیت اب و هوا با ادرس زیر انجام میشود :
+								http://127.0.0.1:8000/accounts/api/v1/GetWeather/
