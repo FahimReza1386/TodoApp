@@ -22,7 +22,7 @@ from rest_framework.response import Response # type: ignore
 from rest_framework.views import APIView # type: ignore
 from rest_framework import viewsets # type: ignore
 from rest_framework.decorators import api_view # type:ignore
-import requests
+import requests # type: ignore
 import random
 
 class RegistrationApi(generics.GenericAPIView):
@@ -170,7 +170,7 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset , user=self.request.user)
         return obj
-    
+   
 
 
 @cache_page(1200)

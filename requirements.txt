@@ -13,7 +13,7 @@ djangorestframework-simplejwt
 coreapi
 
 # Deployment Modules
-
+gunicorn
 
 # Email Third Paty Modules
 django-mail-templated
