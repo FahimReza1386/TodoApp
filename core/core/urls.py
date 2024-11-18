@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
 from rest_framework.documentation import include_docs_urls # type: ignore
 from rest_framework import permissions # type: ignore
 from drf_yasg.views import get_schema_view  # type: ignore
@@ -36,9 +37,13 @@ schema_view = get_schema_view(
    permission_classes=(permissions.AllowAny,),
 )
 
+def indexview(request):
+    return HttpResponse('<h1>Home Page.</h1>')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('TodoList.urls')),
+    path('Task/', include('TodoList.urls')),
+    path('',indexview),
     path('api-auth/',include('rest_framework.urls')),
     path('accounts/', include('accounts.urls')),
     path('api-docs/', include_docs_urls(title = 'Documentation Todo App')),
