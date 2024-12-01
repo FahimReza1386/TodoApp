@@ -42,8 +42,8 @@ def indexview(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Task/', include('TodoList.urls')),
-    path('',indexview),
+    path('', include('TodoList.urls')),
+    # path('',indexview),
     path('api-auth/',include('rest_framework.urls')),
     path('accounts/', include('accounts.urls')),
     path('api-docs/', include_docs_urls(title = 'Documentation Todo App')),
